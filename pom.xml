@@ -12,7 +12,7 @@
 
   <groupId>com.boku</groupId>
   <artifactId>hessian-jakarta</artifactId>
-  <version>5.0.0</version>
+  <version>5.0-SNAPSHOT</version>
   
   <packaging>jar</packaging>
   <name>Hessian-Jakarta</name>
