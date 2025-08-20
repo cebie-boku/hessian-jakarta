@@ -1,0 +1,25 @@
+name: Continuous build
+
+on:
+  push:
+    branches:
+      - 'master'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-continuous:
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Maven Docker Build and Push
+        uses: boku-engineering/github-actions-master-build@v1
+        with:
+          registry_username: ${{ secrets.ARTIFACTORY_USERNAME }}
+          registry_password: ${{ secrets.ARTIFACTORY_PASSWORD }}
+          java_version: 17

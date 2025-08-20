@@ -1,0 +1,18 @@
+name: CI-MAVEN-BUILD-ON-PR
+
+on:
+  pull_request:
+    branches: [ "**" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build-pull-request:
+    uses: boku-engineering/ghactions-pull-requests/.github/workflows/reusable-build-pull-request.yaml@v1
+    with:
+      java-version: 17
+    secrets:
+      registry-username: ${{ secrets.ARTIFACTORY_USERNAME }}
+      registry-password: ${{ secrets.ARTIFACTORY_PASSWORD }}
+

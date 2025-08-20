@@ -1,0 +1,16 @@
+name: Create Release Branch
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-release-branch:
+    runs-on: ubuntu-latest
+    steps:
+       - name: Create Release Branch
+         uses: boku-engineering/github-actions-branch-build@v1
+         with:
+           registry_username: ${{ secrets.ARTIFACTORY_USERNAME }}
+           registry_password: ${{ secrets.ARTIFACTORY_PASSWORD }}
+           boku_github_access_token: ${{ secrets.BOKU_GITHUB_ACCESS_TOKEN }}
+           github_actor: ${{ env.GITHUB_ACTOR }}

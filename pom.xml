@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.boku.maven</groupId>
+    <artifactId>dm-parent-17</artifactId>
+    <version>1.24.0</version>
+  </parent>
+
+  <groupId>com.boku</groupId>
+  <artifactId>hessian-jakarta</artifactId>
+  <version>5.0-SNAPSHOT</version>
+  
+  <packaging>jar</packaging>
+  <name>Hessian-Jakarta</name>
+  <description>Fork of Hessian https://github.com/ebourg/hessian</description>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 1.1</name>
+      <url>http://www.apache.org/licenses/LICENSE-1.1.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Scott Ferguson</name>
+      <email>ferg@caucho.com</email>
+      <organization>Caucho Technology, Inc</organization>
+      <organizationUrl>https://www.caucho.com</organizationUrl>
+    </developer>
+  </developers>
+
+  <scm>
+    <developerConnection>scm:git:https://git@github.com/boku-engineering/hessian-jakarta.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
+  <properties>
+    <jdk.version>17</jdk.version>
+    <project.scm.id>github</project.scm.id>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <build>
+    <sourceDirectory>${project.basedir}/src</sourceDirectory>
+
+    <resources>
+      <resource>
+        <directory>${project.basedir}/src/META-INF</directory>
+        <targetPath>META-INF</targetPath>
+      </resource>
+    </resources>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+</project>
+

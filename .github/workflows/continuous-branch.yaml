@@ -1,0 +1,60 @@
+name: Continuous build on release branch
+
+on:
+  push:
+    branches:
+      - 'release/*'
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "The branch to build (should start with \"release/\")"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  build-continuous-branch:
+    concurrency:
+      group: ${{ github.workflow }}-${{ inputs.branch || github.ref }}
+      cancel-in-progress: true
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          show-progress: false
+          ref: ${{ inputs.branch || github.ref }}
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Set up Maven
+        uses: boku-engineering/ghactions-setup-maven@v1
+        with:
+          registry-username: ${{ secrets.ARTIFACTORY_USERNAME }}
+          registry-password: ${{ secrets.ARTIFACTORY_PASSWORD }}
+
+      - name: Maven Dependency Cache
+        id: maven-dependency-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: maven-${{ github.job }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            maven-${{ github.job }}-
+            maven-build-continuous-
+
+      - name: Artifactory Login
+        shell: bash
+        run: echo ${{ secrets.ARTIFACTORY_PASSWORD }} | docker login artifactory.boku.com -u ${{ secrets.ARTIFACTORY_USERNAME }} --password-stdin
+
+      - name: Build application bundle and Docker image
+        shell: bash
+        env:
+          MAVEN_OPTS: "-Xmx1524m -Djava.net.preferIPv4Stack=true -DadditionalJOption=-Xdoclint:none"
+        run: mvn -V -U -B --no-transfer-progress package clean source:jar install -Pbundle,docker,jacoco -Dstyle.color=always
