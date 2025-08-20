@@ -59,10 +59,11 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
-  
+
+
   <scm>
-    <connection>scm:svn:svn://svn.caucho.com/home/svn/svnroot/resin/trunk/modules/hessian</connection>
-    <url>svn://svn.caucho.com/home/svn/svnroot/resin/trunk/modules/hessian</url>
+    <developerConnection>scm:git:https://git@github.com/boku-engineering/hessian-jakarta.git</developerConnection>
+    <tag>HEAD</tag>
   </scm>
 </project>
 
