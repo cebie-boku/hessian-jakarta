@@ -11,11 +11,11 @@
   </parent>
 
   <groupId>com.boku</groupId>
-  <artifactId>hessian</artifactId>
+  <artifactId>hessian-jakarta</artifactId>
   <version>5.0.0</version>
   
   <packaging>jar</packaging>
-  <name>Hessian</name>
+  <name>Hessian-Jakarta</name>
   <description>Hessian is a compact binary protocol for connecting web services</description>
   <url>http://hessian.caucho.com</url>
 
