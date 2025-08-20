@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.caucho</groupId>
+  <groupId>com.boku</groupId>
   <artifactId>hessian</artifactId>
   <version>5.0.0</version>
   
@@ -35,11 +35,11 @@
   </properties>
 
   <build>
-    <sourceDirectory>${project.basedir}/../src</sourceDirectory>
+    <sourceDirectory>${project.basedir}/src</sourceDirectory>
 
     <resources>
       <resource>
-        <directory>${project.basedir}/../src/META-INF</directory>
+        <directory>${project.basedir}/src/META-INF</directory>
         <targetPath>META-INF</targetPath>
       </resource>
     </resources>
@@ -57,7 +57,7 @@
           <version>3.3.0</version>
           <configuration>
             <archive>
-              <manifestFile>${project.basedir}/../src/manifest</manifestFile>
+              <manifestFile>${project.basedir}/src/manifest</manifestFile>
             </archive>
           </configuration>
         </plugin>

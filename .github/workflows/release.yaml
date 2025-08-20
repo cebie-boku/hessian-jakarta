@@ -1,0 +1,21 @@
+name: Release
+run-name: Running release/tag build on ${{ inputs.git_rel_branch }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      git_rel_branch:
+        description: The branch to release (e.g., master, release/1.5, release/2.22)
+        default: master
+        required: true
+
+jobs:
+  release:
+    uses: boku-engineering/github-actions-tag-build/.github/workflows/reusable-maven-release.yaml@v1
+    with:
+      branch: ${{ inputs.git_rel_branch }}
+      java-version: 17
+    secrets:
+      boku-github-access-token: ${{ secrets.BOKU_GITHUB_ACCESS_TOKEN }}
+      registry-username: ${{ secrets.ARTIFACTORY_USERNAME }}
+      registry-password: ${{ secrets.ARTIFACTORY_PASSWORD }}
