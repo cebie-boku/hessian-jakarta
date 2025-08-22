@@ -15,11 +15,10 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
 
-    runs-on: ubuntu-latest
-    steps:
-      - name: Maven Docker Build and Push
-        uses: boku-engineering/github-actions-master-build@v1
-        with:
-          registry_username: ${{ secrets.ARTIFACTORY_USERNAME }}
-          registry_password: ${{ secrets.ARTIFACTORY_PASSWORD }}
-          java_version: 17
+    uses: boku-engineering/github-actions-continuous-build/.github/workflows/maven-snapshot-build.yaml@v1
+    with:
+      branch: master
+      java-version: 17
+    secrets:
+      registry-username: ${{ secrets.ARTIFACTORY_USERNAME }}
+      registry-password: ${{ secrets.ARTIFACTORY_PASSWORD }}
